@@ -25,7 +25,8 @@ jobs:
         with:
           mdbook-version: '0.4.52'
 
-      - name: Cache Cargo registry and bin
+      - name: Cache Cargo artifacts
+        id: cache-cargo-bin
         uses: actions/cache@v4
         with:
           path: |
@@ -33,13 +34,17 @@ jobs:
             ~/.cargo/bin
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
-            ${{ runner.os }}-cargo-
+            ${{ runner.os }}-cargo-mdbook-plugins-
 
       - name: Install extensions
+        if: steps.cache-cargo-bin.outputs.cache-hit != 'true'
         run: |
           cargo install mdbook-katex
           cargo install mdbook-toc
           cargo install mdbook-wikilinks
+
+      - name: Verify installation
+        run: mdbook --version
 
       - name: Build mdBook
         run: mdbook build
