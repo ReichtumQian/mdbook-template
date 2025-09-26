@@ -1,0 +1,18 @@
+[book]
+authors = ["reichtum"]
+language = "en"
+multilingual = false
+src = "src"
+title = "mdbook-template"
+
+[output.html]
+additional-css = ["custom.css"]
+
+[output.html]
+mathjax-support = true
+
+[preprocessor.wikilinks]
+
+[preprocessor.toc]
+command = "mdbook-toc"
+renderer = ["html"]
