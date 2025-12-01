@@ -7,10 +7,7 @@ title = "mdbook-template"
 
 [output.html]
 additional-css = ["custom.css"]
-mathjax-support = true
 
 [preprocessor.wikilinks]
 
-[preprocessor.toc]
-command = "mdbook-toc"
-renderer = ["html"]
+[preprocessor.katex]
